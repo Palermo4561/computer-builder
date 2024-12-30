@@ -3,4 +3,4 @@ const { getUsers } = require('../controllers/users');
 
 router.get('/users', getUsers);
 
-module.exports = router; 
+module.exports = router;
