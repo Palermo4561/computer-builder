@@ -3,10 +3,7 @@ const { Client } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-const schema = fs.readFileSync(
-  path.join(__dirname, 'db', 'schema.sql'),
-  'utf8',
-);
+const schema = fs.readFileSync(path.join(__dirname, 'db', 'schema.sql'), 'utf8');
 const seed = fs.readFileSync(path.join(__dirname, 'db', 'seed.sql'), 'utf8');
 
 // create client for initialization
@@ -21,7 +18,6 @@ const client = new Client({
 async function populate_database() {
   try {
     await client.connect();
-
     await client.query(schema);
     await client.query(seed);
   } catch (e) {
@@ -30,4 +26,5 @@ async function populate_database() {
     await client.end();
   }
 }
+
 populate_database();

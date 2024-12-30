@@ -1,8 +1,8 @@
 const pool = require('../db');
 
-const getUsers = async (req, res) => {
+const getSavedComputers = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM users');
+    const result = await pool.query('SELECT * FROM saved_computers');
     res.status(200).json(result.rows);
   } catch (e) {
     console.error(e);
@@ -10,4 +10,4 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = { getUsers };
+module.exports = { getSavedComputers };

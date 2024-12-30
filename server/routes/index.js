@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const { getUsers } = require('../controllers/users');
+const { getSavedComputers } = require('../controllers/saved_computers');
+const components_router = require('./components');
 
-router.get('/users', getUsers);
+router.get('/saved_computers', getSavedComputers);
+router.use('/components', components_router);
 
 module.exports = router;
