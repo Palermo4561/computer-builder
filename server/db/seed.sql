@@ -74,16 +74,18 @@ VALUES
 
 
 -- seed saved_computers
-INSERT INTO saved_computers (cpu, gpu, motherboard, ram, storage)
+INSERT INTO saved_computers (name, cpu, gpu, motherboard, ram, storage)
 SELECT 
+  'Computer 1',
   (SELECT id FROM components WHERE category = 'cpu' AND socket = 'AMD' ORDER BY id LIMIT 1),
   (SELECT id FROM components WHERE category = 'gpu' ORDER BY id LIMIT 1),
   (SELECT id FROM components WHERE category = 'motherboard' AND socket = 'AMD' ORDER BY id LIMIT 1),
   (SELECT id FROM components WHERE category = 'ram' ORDER BY id LIMIT 1),
   (SELECT id FROM components WHERE category = 'storage' ORDER BY id LIMIT 1);
 
-INSERT INTO saved_computers (cpu, gpu, motherboard, ram, storage)
+INSERT INTO saved_computers (name, cpu, gpu, motherboard, ram, storage)
 SELECT 
+  'Computer 2',
   (SELECT id FROM components WHERE category = 'cpu' AND socket = 'Intel' ORDER BY id LIMIT 1),
   (SELECT id FROM components WHERE category = 'gpu' ORDER BY id OFFSET 1 LIMIT 1),
   (SELECT id FROM components WHERE category = 'motherboard' AND socket = 'Intel' ORDER BY id LIMIT 1),

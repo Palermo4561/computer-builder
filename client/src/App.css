@@ -1,7 +1,8 @@
-
-h1, p {
+h1,
+p {
   margin: auto;
   width: 50%;
   border: 3px solid rgb(21, 87, 148);
+  color: white;
   padding: 10px;
 }

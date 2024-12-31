@@ -1,0 +1,13 @@
+#computers {
+  background-color: rgb(6, 43, 6);
+  border: dotted rgb(255, 255, 255) 3px;
+  width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  margin: auto;
+  width: 50%;
+  padding-bottom: 5px;
+}

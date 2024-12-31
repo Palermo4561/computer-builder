@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-const get_components = (category) => {
+const getComponents = (category) => {
   return async (req, res) => {
     try {
       const result = await pool.query(`SELECT * FROM components WHERE category=\'${category}\'`);
@@ -12,10 +12,21 @@ const get_components = (category) => {
   };
 };
 
+const getFromId = async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT * FROM components WHERE id=\'${req.params.id}\'`);
+    res.status(200).json(result.rows);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send('Bad database access');
+  }
+};
+
 module.exports = {
-  getCPUs: get_components('cpu'),
-  getGPUs: get_components('gpu'),
-  getMotherboards: get_components('motherboard'),
-  getRAM: get_components('ram'),
-  getStorage: get_components('storage'),
+  getCPUs: getComponents('cpu'),
+  getGPUs: getComponents('gpu'),
+  getMotherboards: getComponents('motherboard'),
+  getRAM: getComponents('ram'),
+  getStorage: getComponents('storage'),
+  getFromId,
 };

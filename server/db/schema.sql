@@ -14,6 +14,7 @@ socket VARCHAR(10) DEFAULT NULL
 DROP TABLE IF EXISTS saved_computers; 
 CREATE TABLE saved_computers (
 id SERIAL PRIMARY KEY, 
+name VARCHAR(100) DEFAULT 'unnamed',
 cpu INTEGER, 
 gpu INTEGER, 
 motherboard INTEGER, 
