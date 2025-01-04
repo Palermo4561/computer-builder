@@ -1,5 +1,19 @@
 {
+  "name": "computer-builder",
+  "version": "1.0.0",
+  "description": "This is a beginner full-stack application to gain experience with the PERN stack",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "client": "npm --prefix client run dev",
+    "server": "npm --prefix server run dev",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "prettier": "^3.4.2"
   }
 }
