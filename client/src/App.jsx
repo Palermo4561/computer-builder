@@ -1,13 +1,28 @@
+import {
+  SavedComputers,
+  Home,
+  Loader,
+  CreateComponent,
+  Navbar,
+  CreateComputer,
+} from './pages';
+
 import './App.css';
-import { Fragment } from 'react';
-import Computers from './pages/Computers.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Suspense } from 'react';
 
 export default function App() {
   return (
-    <Fragment>
-      <h1>Hello computer-builder!</h1>
-      <p>A PERN project to choose computer parts</p>
-      <Computers />
-    </Fragment>
+    <BrowserRouter>
+      <Suspense fallback={<Loader />}>
+        <Navbar />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path='create-computer' element={<CreateComputer />} />
+          <Route path='computers' element={<SavedComputers />} />
+          <Route path='create-component' element={<CreateComponent />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
