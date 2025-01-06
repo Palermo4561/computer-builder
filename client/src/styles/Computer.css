@@ -8,3 +8,49 @@
 h3 {
   margin: 10px 20px;
 }
+
+.link-container {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  border: 1px solid white;
+  padding: 10px;
+  background-color: rgb(6, 64, 118);
+  color: white;
+  width: 600px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  margin-top: 10px;
+}
+
+.specs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.specs div {
+  flex-basis: 50%;
+  margin: 5px 0;
+}

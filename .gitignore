@@ -2,4 +2,4 @@
 *.env
 .prettierrc
 *config.js
-
+.idea

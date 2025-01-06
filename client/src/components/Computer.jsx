@@ -1,40 +1,72 @@
 import { fetchData } from '../api/api.js';
 import { useEffect, useState } from 'react';
 import '../styles/Computer.css';
+import { Link } from 'react-router-dom';
+import { Loader } from '../pages';
+
+function nameToUrl(name) {
+  return name.toLowerCase().replace(/ /g, '-');
+}
 
 export default function Computer({ computer }) {
-  const [fetchedData, setFetchedData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [cpu, setCpu] = useState(null);
+  const [gpu, setGpu] = useState(null);
+  const [motherboard, setMotherboard] = useState(null);
+  const [ram, setRam] = useState(null);
+  const [storage, setStorage] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const cpu = await fetchData(`/components/${computer.cpu}`);
-        const gpu = await fetchData(`/components/${computer.gpu}`);
-        const motherboard = await fetchData(`/components/${computer.motherboard}`);
-        const ram = await fetchData(`/components/${computer.ram}`);
-        const storage = await fetchData(`/components/${computer.storage}`);
-        setFetchedData([
-          cpu[0].name,
-          gpu[0].name,
-          motherboard[0].name,
-          ram[0].name,
-          storage[0].name,
-        ]);
+        setCpu(await fetchData(`/components/${computer.cpu}`));
+        setGpu(await fetchData(`/components/${computer.gpu}`));
+        setMotherboard(await fetchData(`/components/${computer.motherboard}`));
+        setRam(await fetchData(`/components/${computer.ram}`));
+        setStorage(await fetchData(`/components/${computer.storage}`));
       } catch (e) {
         console.error('Error fetching data:', e);
       }
     };
+
     getData();
-  }, [computer.cpu, computer.gpu, computer.motherboard, computer.ram, computer.storage]);
+  }, [computer]);
+
+  useEffect(() => {
+    if (cpu && gpu && motherboard && ram && storage) {
+      let price = 0;
+      [cpu, gpu, motherboard, ram, storage].map((component) => {
+        price += Number(component.price);
+      });
+      setLoading(false);
+      setTotalPrice(price);
+    }
+  }, [cpu, gpu, motherboard, ram, storage]);
+
+  if (loading) return <Loader />;
 
   return (
-    <div id='block'>
-      <h3>{computer.name}</h3>
-      <ul>
-        {fetchedData.map((part, index) => (
-          <li key={index}>{part}</li>
-        ))}
-      </ul>
+    <div className='container'>
+      <Link
+        to={nameToUrl(computer.name)}
+        state={{ id: computer.id }}
+        className='link-container'
+      >
+        <div className='header'>
+          <span className='title'>{computer.name}</span>
+          <span className='price'>${totalPrice}</span>
+        </div>
+        <div className='content'>
+          <img className='icon' src='/computer.svg' />
+          <div className='specs'>
+            <div>Processor: {cpu?.name}</div>
+            <div>GPU: {gpu?.name}</div>
+            <div>RAM: {ram?.name}</div>
+            <div>Storage: {storage?.name}</div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }
