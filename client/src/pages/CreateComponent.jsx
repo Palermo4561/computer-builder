@@ -2,7 +2,7 @@ import { useState, Fragment } from 'react';
 import { addComponent } from '../api/api';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { titleFormat } from '../../utils/utils';
+import { titleFormat } from '../utils/utils';
 import '../styles/CreateComponent.css';
 
 export default function CreateComponent() {
