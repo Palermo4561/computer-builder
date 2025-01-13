@@ -11,3 +11,14 @@ export async function fetchData(endpoint) {
     throw e;
   }
 }
+
+export async function addComponent(component) {
+  try {
+    await axios.post(API_URL + '/components', component, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}

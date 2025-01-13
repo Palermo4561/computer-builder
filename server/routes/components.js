@@ -6,6 +6,7 @@ const {
   getRAM,
   getStorage,
   getFromId,
+  postComponent,
 } = require('../controllers/components');
 
 router.get('/', (req, res) => {
@@ -18,5 +19,6 @@ router.get('/motherboards', getMotherboards);
 router.get('/ram', getRAM);
 router.get('/storage', getStorage);
 router.get('/:id', getFromId);
+router.post('/', postComponent);
 
 module.exports = router;

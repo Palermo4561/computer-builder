@@ -11,10 +11,13 @@ import {
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Suspense fallback={<Loader />}>
         <Navbar />
         <Routes>
