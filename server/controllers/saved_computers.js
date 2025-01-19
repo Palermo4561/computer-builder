@@ -1,25 +1,28 @@
 const pool = require('../db');
 
-const getAllSavedComputers = async (req, res) => {
+// get all saved computers 
+const getAll = async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM saved_computers');
     res.status(200).json(result.rows);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     res.status(500).send('Bad database access');
   }
 };
 
+// get from database the row with specified id
 async function getFromId(database, id) {
   try {
     const result = await pool.query(`SELECT * FROM ${database} WHERE id = $1`, [id]);
     return result.rows[0];
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
   }
 }
 
-const getSavedComputer = async (req, res) => {
+// get ids of the computer components from specific saved computer id
+const getFullComputer = async (req, res) => {
   try {
     const computer = await getFromId('saved_computers', req.params.id);
 
@@ -34,10 +37,10 @@ const getSavedComputer = async (req, res) => {
     );
 
     res.status(200).json({ computerName: computer.name, ...result });
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     res.status(500).send('Bad database access');
   }
 };
 
-module.exports = { getAllSavedComputers, getSavedComputer };
+module.exports = { getAll, getFullComputer };

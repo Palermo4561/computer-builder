@@ -1,32 +1,37 @@
 const pool = require('../db');
 
-const getComponents = (category) => {
+// returns the GET function for a specified component
+const getFromCategory = (category) => {
   return async (req, res) => {
     try {
       const result = await pool.query(
-        `SELECT * FROM components WHERE category=\'${category}\'`,
+        `SELECT * FROM components WHERE category = $1`, 
+        [category]
       );
       res.status(200).json(result.rows);
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
       res.status(500).send('Bad database access');
     }
   };
 };
 
+// gets a specific component from its unique id
 const getFromId = async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT * FROM components WHERE id=\'${req.params.id}\'`,
+      `SELECT * FROM components WHERE id = $1`,
+      [req.params.id]
     );
     res.status(200).json(result.rows[0]);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     res.status(500).send('Bad database access');
   }
 };
 
-const postComponent = async (req, res) => {
+// adds a new component to the database
+const addComponent = async (req, res) => {
   try {
     const component = req.body;
     await pool.query(
@@ -40,18 +45,18 @@ const postComponent = async (req, res) => {
       ],
     );
     res.status(200).send('Added ');
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     res.status(500).send('Bad database access');
   }
 };
 
 module.exports = {
-  getCPUs: getComponents('cpu'),
-  getGPUs: getComponents('gpu'),
-  getMotherboards: getComponents('motherboard'),
-  getRAM: getComponents('ram'),
-  getStorage: getComponents('storage'),
+  getCPUs: getFromCategory('cpu'),
+  getGPUs: getFromCategory('gpu'),
+  getMotherboards: getFromCategory('motherboard'),
+  getRAMs: getFromCategory('ram'),
+  getStorages: getFromCategory('storage'),
   getFromId,
-  postComponent,
+  addComponent,
 };

@@ -11,7 +11,7 @@ app.use(express.json());
 // api routes
 app.use('/api', routes);
 
-// just the base server address
+// base server address
 app.get('/', (req, res) => {
   res.status(404).send("<h1>Please specify path with \'/api\'</h1>");
 });

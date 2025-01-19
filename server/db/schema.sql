@@ -10,7 +10,7 @@ details TEXT,
 socket VARCHAR(10) DEFAULT NULL
 );
 
---create saved_computers table
+-- create saved_computers table
 DROP TABLE IF EXISTS saved_computers; 
 CREATE TABLE saved_computers (
 id SERIAL PRIMARY KEY, 

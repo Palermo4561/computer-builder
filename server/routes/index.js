@@ -1,12 +1,8 @@
 const router = require('express').Router();
-const {
-  getAllSavedComputers,
-  getSavedComputer,
-} = require('../controllers/saved_computers');
-const components_router = require('./components');
+const componentRouter = require('./components');
+const computerRouter = require('./saved_computers');
 
-router.get('/saved-computers', getAllSavedComputers);
-router.get('/saved-computers/:id', getSavedComputer);
-router.use('/components', components_router);
+router.use('/components', componentRouter);
+router.use('/saved-computers', computerRouter);
 
 module.exports = router;
